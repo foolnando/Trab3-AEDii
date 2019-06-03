@@ -41,36 +41,7 @@ int chaveMultiplica(int chave, int tableSize){
   float a = 0.618033898;
   float val = chave*a;
   val = val - (int)val;
-  return (int) (tableSize*val)
-}
-
-int insereHash_semColisao(hash* h, Produto *p){
-  if(h == NULL || h->qtd == h->tableSize){
-    return 0;
-  }
-  int chave = p.id;
-  int pos = chaveDivisao(chave, h->tableSize);
-  Produto *new;
-  new = (Produto*) malloc(sizeof(Produto));
-  if(new == NULL){
-    return 0;
-  }
-  new = p;
-  h->item[pos] = novo
-  h->qtd++;
-  return 1;
-}
-
-int buscaHash_semColisao(hash* h, int id, Produto *p){
-  if(h == NULL){
-    return 0;
-  }
-  int pos = chaveDivisao(id, h->tableSize);
-  if(h->item[pos] == NULL){
-    return 0;
-  }
-  *p = *(h->item[pos])
-  return 1;
+  return (int) (tableSize*val);
 }
 
 
@@ -82,7 +53,7 @@ int insereHash_enderAberto(hash* h, Produto *p){
   if(h == NULL || h->qtd == h->tableSize){
     return 0;
   }
-  int chave = p.id;
+  int chave = p->id;
   int i, pos, newPos;
   pos = chaveDivisao(chave, h->tableSize);
   for(i=0;i<h->tableSize;i++){
@@ -90,11 +61,11 @@ int insereHash_enderAberto(hash* h, Produto *p){
     if(h->item[newPos] == NULL){
       Produto *new;
       new = (Produto*) malloc(sizeof(Produto));
-      if(novo == NULL){
+      if(new == NULL){
         return 0;
       }
-      *novo = p;
-      h->item[newPos] = novo;
+      new = p;
+      h->item[newPos] = new;
       h->qtd++;
       return 1;
     }
@@ -106,7 +77,7 @@ int buscaHash_enderAberto(hash* h, int id, Produto *p){
     return 0;
   }
   int i,pos, newPos;
-  int pos = chaveDivisao(id, h->tableSize);
+  pos = chaveDivisao(id, h->tableSize);
   for(i=0;i < h->tableSize; i++){
     newPos = sondagemLinear(pos,i,h->tableSize);
     if(h->item[newPos] == NULL){
